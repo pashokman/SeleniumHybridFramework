@@ -18,9 +18,9 @@
 * search_for_invalid_product;
 * search_without_entering_any_product.
 
-# What knowledge I used for develop framework
+# Steps for develop the framework
 * created different test files to test different functionality (login, register, search);
-* wrote independent tests for every case;
+* wrote independent tests for every test-case;
 * created a fixture and moved it to the conftest.py file;
 * wrapped tests into classes;
-* used a fixture to the classes.
+* used a fixture to classes.
