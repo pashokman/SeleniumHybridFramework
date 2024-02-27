@@ -23,4 +23,6 @@
 * wrote independent tests for every test-case;
 * created a fixture and moved it to the conftest.py file;
 * wrapped tests into classes;
-* used a fixture to classes.
+* used a fixture to classes;
+* added utility for reading (browser, url) from configuration file - create new package - configurations;
+* change all tests into POM (page object model) - create new  package - pages.

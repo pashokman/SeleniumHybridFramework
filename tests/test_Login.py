@@ -1,60 +1,71 @@
 from datetime import datetime
 import pytest
-
-from selenium.webdriver.common.by import By
+from pages.AccountPage import AccountPage
+from pages.LoginPage import LoginPage
+from pages.HomePage import HomePage
 
 
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestLogin:
+    
     def test_login_with_valid_credentials(self):
-        self.driver.find_element(By.XPATH, '//span[text()="My Account"]').click()
-        self.driver.find_element(By.LINK_TEXT, 'Login').click()
+        home_page = HomePage(self.driver)
+        home_page.click_on_my_account_drop_menu()
+        home_page.select_login_option()
 
         # create by hands a new account for testing with the same credentials or change them
-        self.driver.find_element(By.NAME, 'email').send_keys('test_auto@gmail.com')
-        self.driver.find_element(By.NAME, 'password').send_keys('12345')
-        self.driver.find_element(By.XPATH, '//input[@value="Login"]').click()
+        login_page = LoginPage(self.driver)
+        login_page.enter_email_address('test_auto@gmail.com')
+        login_page.enter_password('12345')
+        login_page.click_login_btn()
 
-        assert self.driver.find_element(By.LINK_TEXT, 'Edit your account information').is_displayed()
+        account_page = AccountPage(self.driver)
+        assert account_page.display_status_of_field_after_successful_login(), "Successful login failed"
 
 
     def test_login_with_invalid_email_and_valid_password(self):
-        self.driver.find_element(By.XPATH, '//span[text()="My Account"]').click()
-        self.driver.find_element(By.LINK_TEXT, 'Login').click()
+        home_page = HomePage(self.driver)
+        home_page.click_on_my_account_drop_menu()
+        home_page.select_login_option()
 
         # a new email address is generated every time
-        self.driver.find_element(By.NAME, 'email').send_keys(self.generate_email_with_timestamp())
-        self.driver.find_element(By.NAME, 'password').send_keys('12345')
-        self.driver.find_element(By.XPATH, '//input[@value="Login"]').click()
+        login_page = LoginPage(self.driver)
+        login_page.enter_email_address(self.generate_email_with_timestamp())
+        login_page.enter_password('12345')
+        login_page.click_login_btn()
 
-        expected_error_message = 'Warning: No match for E-Mail Address and/or Password.'
-        resulted_error_message = self.driver.find_element(By.XPATH, '//div[@id="account-login"]/div[1]').text
-        assert resulted_error_message == expected_error_message, "Email/Password err messages does not match"
+        expected_no_match_warning = 'Warning: No match for E-Mail Address and/or Password.'
+        resulted_no_match_warning = login_page.retrive_no_match_email_pwd()
+        assert resulted_no_match_warning == expected_no_match_warning, "Email/Password warnings does not match"
 
 
     def test_login_with_valid_email_and_invalid_password(self):
-        self.driver.find_element(By.XPATH, '//span[text()="My Account"]').click()
-        self.driver.find_element(By.LINK_TEXT, 'Login').click()
+        home_page = HomePage(self.driver)
+        home_page.click_on_my_account_drop_menu()
+        home_page.select_login_option()
 
         # create by hands a new account for testing with the same credentials or change them
-        self.driver.find_element(By.NAME, 'email').send_keys('test_auto@gmail.com')
-        self.driver.find_element(By.NAME, 'password').send_keys('123456')
-        self.driver.find_element(By.XPATH, '//input[@value="Login"]').click()
+        login_page = LoginPage(self.driver)
+        login_page.enter_email_address('test_auto@gmail.com')
+        login_page.enter_password('123456')
+        login_page.click_login_btn()
 
-        expected_error_message = 'Warning: No match for E-Mail Address and/or Password.'
-        resulted_error_message = self.driver.find_element(By.XPATH, '//div[@id="account-login"]/div[1]').text
-        assert resulted_error_message == expected_error_message, "Email/Password err messages does not match"
+        expected_error_warning = 'Warning: No match for E-Mail Address and/or Password.'
+        resulted_error_warning = login_page.retrive_no_match_email_pwd()
+        assert resulted_error_warning == expected_error_warning, "Email/Password warnings does not match"
 
 
     def test_login_without_entering_credentials(self):
-        self.driver.find_element(By.XPATH, '//span[text()="My Account"]').click()
-        self.driver.find_element(By.LINK_TEXT, 'Login').click()
+        home_page = HomePage(self.driver)
+        home_page.click_on_my_account_drop_menu()
+        home_page.select_login_option()
 
-        self.driver.find_element(By.XPATH, '//input[@value="Login"]').click()
+        login_page = LoginPage(self.driver)
+        login_page.click_login_btn()
 
-        expected_error_message = 'Warning: No match for E-Mail Address and/or Password.'
-        resulted_error_message = self.driver.find_element(By.XPATH, '//div[@id="account-login"]/div[1]').text
-        assert resulted_error_message == expected_error_message, "Email/Password err messages does not match"
+        expected_error_warning = 'Warning: No match for E-Mail Address and/or Password.'
+        resulted_error_warning = login_page.retrive_no_match_email_pwd()
+        assert resulted_error_warning == expected_error_warning, "Email/Password warnings does not match"
 
 
     def generate_email_with_timestamp(self):

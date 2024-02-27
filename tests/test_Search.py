@@ -1,28 +1,36 @@
 import pytest
-from selenium.webdriver.common.by import By
+from pages.HomePage import HomePage
+from pages.SearchPage import SearchPage
 
 
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestSearch:
+    
     def test_search_for_a_valid_product(self):
-        self.driver.find_element(By.XPATH, "//input[@name='search']").send_keys('HP')
-        self.driver.find_element(By.XPATH, "//button[contains(@class,'btn-default')]").click()
-        
-        assert self.driver.find_element(By.LINK_TEXT, "HP LP3065").is_displayed(), "Element does not displayed"
+        home_page = HomePage(self.driver)
+        home_page.enter_product_into_search_field('HP')
+        home_page.click_on_search_btn()
+
+        search_page = SearchPage(self.driver)
+        assert search_page.display_status_of_valid_product(), "Element does not displayed"
 
 
     def test_search_for_invalid_product(self):
-        self.driver.find_element(By.XPATH, "//input[@name='search']").send_keys('Honda')
-        self.driver.find_element(By.XPATH, "//button[contains(@class,'btn-default')]").click()
+        home_page = HomePage(self.driver)
+        home_page.enter_product_into_search_field('Honda')
+        home_page.click_on_search_btn()
         
-        expected_search_err_message = "There is no product that matches the search criteria."
-        result_search_err_message = self.driver.find_element(By.XPATH, "//input[@id='button-search']/following-sibling::p").text
-        assert result_search_err_message == expected_search_err_message, "Invalid search err messages does not match"
+        expected_no_product_message = "There is no product that matches the search criteria."
+        search_page = SearchPage(self.driver)
+        result_no_product_message = search_page.retrive_no_product_message()
+        assert result_no_product_message == expected_no_product_message, "Invalid search err messages does not match"
 
 
     def test_search_without_entering_any_product(self):
-        self.driver.find_element(By.XPATH, "//button[contains(@class,'btn-default')]").click()
+        home_page = HomePage(self.driver)
+        home_page.click_on_search_btn()
         
         expected_search_err_message = "There is no product that matches the search criteria."
-        result_search_err_message = self.driver.find_element(By.XPATH, "//input[@id='button-search']/following-sibling::p").text
-        assert result_search_err_message == expected_search_err_message, "Empty search err messages does not match" 
+        search_page = SearchPage(self.driver)
+        result_search_err_message = search_page.retrive_no_product_message()
+        assert result_search_err_message == expected_search_err_message, "Empty search err messages does not match"
