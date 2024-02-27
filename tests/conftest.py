@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-
 from utilities.ReadConfigurations import read_configuration
 
 
