@@ -25,4 +25,5 @@
 * wrapped tests into classes;
 * used a fixture to classes;
 * added utility for reading (browser, url) from configuration file - create new package - configurations;
-* change all tests into POM (page object model) - create new  package - pages.
+* change all tests into POM (page object model) - create new  package - pages;
+* added return statements of the next page object into last methods which called in tests with previous page object.

@@ -1,7 +1,5 @@
 from datetime import datetime
 import pytest
-from pages.AccountSuccessPage import AccountSuccessPage
-from pages.RegisterPage import RegisterPage
 from pages.HomePage import HomePage
 
 
@@ -11,15 +9,12 @@ class TestRefister:
     def test_register_with_mandatory_fields(self):
         home_page = HomePage(self.driver)
         home_page.click_on_my_account_drop_menu()
-        home_page.select_register_option()
-        
-        register_page = RegisterPage(self.driver)
+        register_page = home_page.select_register_option()        
         register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), 1234567890, 12345)
         register_page.accept_user_agreement()
-        register_page.click_on_continue_btn()
-
+        account_success_page = register_page.click_on_continue_btn()
+    
         expected_account_created_message = 'Your Account Has Been Created!'
-        account_success_page = AccountSuccessPage(self.driver)
         resulted_account_created_message = account_success_page.retrive_account_created_message()
         assert resulted_account_created_message == expected_account_created_message, "Account created messages (mandatory fields) does not match"
 
@@ -27,16 +22,13 @@ class TestRefister:
     def test_register_with_all_fields(self):
         home_page = HomePage(self.driver)
         home_page.click_on_my_account_drop_menu()
-        home_page.select_register_option()
-        
-        register_page = RegisterPage(self.driver)
+        register_page = home_page.select_register_option()        
         register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), 1234567890, 12345)
         register_page.accept_user_agreement()
         register_page.select_newsletter_radio_btn_no()
-        register_page.click_on_continue_btn()
-
+        account_success_page = register_page.click_on_continue_btn()
+    
         expected_account_created_message = 'Your Account Has Been Created!'
-        account_success_page = AccountSuccessPage(self.driver)
         resulted_account_created_message = account_success_page.retrive_account_created_message()
         assert resulted_account_created_message == expected_account_created_message, "Account create messages (all fields) does not match"
 
@@ -44,9 +36,7 @@ class TestRefister:
     def test_register_with_duplicate_email(self):
         home_page = HomePage(self.driver)
         home_page.click_on_my_account_drop_menu()
-        home_page.select_register_option()
-        
-        register_page = RegisterPage(self.driver)
+        register_page = home_page.select_register_option()        
         # email should be copied from test_Login.py - test_login_with_valid_credentials and email should be 
         # already registered another fields should be different from test_Login.py - test_login_with_valid_credentials
         register_page.fill_register_form_mandatory_fields("Jane", "Doe", 'test_auto@gmail.com', 2234567890, 123456)
@@ -61,9 +51,7 @@ class TestRefister:
     def test_register_without_entering_any_fields(self):
         home_page = HomePage(self.driver)
         home_page.click_on_my_account_drop_menu()
-        home_page.select_register_option()
-        
-        register_page = RegisterPage(self.driver)
+        register_page = home_page.select_register_option()        
         register_page.click_on_continue_btn()
 
         expected_privacy_policy_warning = 'Warning: You must agree to the Privacy Policy!'

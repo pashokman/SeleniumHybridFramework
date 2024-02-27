@@ -1,5 +1,9 @@
 from selenium.webdriver.common.by import By
 
+from pages.RegisterPage import RegisterPage
+from pages.LoginPage import LoginPage
+from pages.SearchPage import SearchPage
+
 
 class HomePage:
     
@@ -22,6 +26,7 @@ class HomePage:
 
     def click_on_search_btn(self):
         self.driver.find_element(By.XPATH, self.search_button_xpath).click()
+        return SearchPage(self.driver)
 
 
     def click_on_my_account_drop_menu(self):
@@ -30,7 +35,9 @@ class HomePage:
 
     def select_login_option(self):
         self.driver.find_element(By.LINK_TEXT, self.login_option_link_text).click()
+        return LoginPage(self.driver)
 
 
     def select_register_option(self):
         self.driver.find_element(By.LINK_TEXT, self.register_option_link_text).click()
+        return RegisterPage(self.driver)

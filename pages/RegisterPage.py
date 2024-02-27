@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from pages.AccountSuccessPage import AccountSuccessPage
+
 
 class RegisterPage:
 
@@ -62,6 +64,7 @@ class RegisterPage:
 
     def click_on_continue_btn(self):
         self.driver.find_element(By.XPATH, self.continue_btn_xpath).click()
+        return AccountSuccessPage(self.driver)
 
 
     def retrive_warning(self):

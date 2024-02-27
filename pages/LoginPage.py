@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from .AccountPage import AccountPage
+
 
 class LoginPage:
     
@@ -26,6 +28,7 @@ class LoginPage:
 
     def click_login_btn(self):
         self.driver.find_element(By.XPATH, self.login_btn_xpath).click()
+        return AccountPage(self.driver)
 
 
     def retrive_no_match_email_pwd(self):
