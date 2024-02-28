@@ -31,6 +31,7 @@
 * created BasePage class and described main methods of working with an web element, refactored other classes to be inherited from BasePage class, used parent methods;
 * added BaseTest class before which should paste pytest mark with fixture for all test classes and inherited this class by other test classes;
 * moved duplicate methods from test classes to BaseTest class;
+* implemented DDT in test_Login file (created new utility - ExcelUtils, added a folder for text files - ExcelFiles);
 
 
 # Help to run tests:
