@@ -1,10 +1,9 @@
 from datetime import datetime
-import pytest
 from pages.HomePage import HomePage
+from tests.BaseTest import BaseTest
 
 
-@pytest.mark.usefixtures("setup_and_teardown")
-class TestRefister:
+class TestRefister(BaseTest):
 
     def test_register_with_mandatory_fields(self):
         home_page = HomePage(self.driver)

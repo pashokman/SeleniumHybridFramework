@@ -29,6 +29,7 @@
 * added return statements to the next page object into last page methods which called in tests with previous page object;
 * refactored the code in page classes and tests - develop methods which consists from another methods to make test more readable and shorter;
 * created BasePage class and described main methods of working with an web element, refactored other classes to be inherited from BasePage class, used parent methods;
+* added BaseTest class before which should paste pytest mark with fixture for all test classes and inherited this class by other test classes;
 
 
 # Help to run tests:
