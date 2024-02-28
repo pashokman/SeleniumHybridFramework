@@ -1,12 +1,11 @@
-from selenium.webdriver.common.by import By
-
 from pages.AccountSuccessPage import AccountSuccessPage
+from pages.BasePage import BasePage
 
 
-class RegisterPage:
+class RegisterPage(BasePage):
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     field_firstname_name = 'firstname'
     field_lastname_name = 'lastname'
@@ -26,24 +25,24 @@ class RegisterPage:
 
 
     def enter_firstname(self, firstname):
-        self.driver.find_element(By.NAME, self.field_firstname_name).send_keys(firstname)
+        self.type_into_element('field_firstname_name', self.field_firstname_name, firstname)
 
 
     def enter_lastname(self, lastname):
-        self.driver.find_element(By.NAME, self.field_lastname_name).send_keys(lastname)
+        self.type_into_element('field_lastname_name', self.field_lastname_name, lastname)
 
 
     def enter_email(self, email):
-        self.driver.find_element(By.NAME, self.field_email_name).send_keys(email)
+        self.type_into_element('field_email_name', self.field_email_name, email)
 
 
     def enter_telephone(self, telephone):
-        self.driver.find_element(By.NAME, self.field_telephone_name).send_keys(telephone)
+        self.type_into_element('field_telephone_name', self.field_telephone_name, telephone)
 
 
     def enter_pwd_and_confirm_pwd(self, password):
-        self.driver.find_element(By.NAME, self.field_password_name).send_keys(password)
-        self.driver.find_element(By.NAME, self.field_confirm_pwd_name).send_keys(password)
+        self.type_into_element('field_password_name', self.field_password_name, password)
+        self.type_into_element('field_confirm_pwd_name', self.field_confirm_pwd_name, password)
 
 
     def fill_register_form_mandatory_fields(self, firstname, lastname, email, telephone, password, yes_or_no, privacy_policy):
@@ -60,40 +59,40 @@ class RegisterPage:
 
 
     def accept_user_agreement(self):
-        self.driver.find_element(By.NAME, self.field_agree_name).click()
+        self.element_click('field_agree_name', self.field_agree_name)
 
 
     def select_newsletter_radio_btn_yes(self):
-        self.driver.find_element(By.XPATH, self.radio_btn_yes_newsletter_xpath).click()
+        self.element_click('radio_btn_yes_newsletter_xpath', self.radio_btn_yes_newsletter_xpath)
 
 
     def click_on_continue_btn(self):
-        self.driver.find_element(By.XPATH, self.continue_btn_xpath).click()
+        self.element_click('continue_btn_xpath', self.continue_btn_xpath)
         return AccountSuccessPage(self.driver)
 
 
     def retrive_warning(self):
-        return self.driver.find_element(By.XPATH, self.warning_xpath).text
+        return self.retrive_element_text('warning_xpath', self.warning_xpath)
     
 
     def retrive_firstname_err_message(self):
-        return self.driver.find_element(By.XPATH, self.firstname_err_message_xpath).text
+        return self.retrive_element_text('firstname_err_message_xpath', self.firstname_err_message_xpath)
     
 
     def retrive_lastname_err_message(self):
-        return self.driver.find_element(By.XPATH, self.lastname_err_message_xpath).text
+        return self.retrive_element_text('lastname_err_message_xpath', self.lastname_err_message_xpath)
     
 
     def retrive_email_err_message(self):
-        return self.driver.find_element(By.XPATH, self.email_err_message_xpath).text
+        return self.retrive_element_text('email_err_message_xpath', self.email_err_message_xpath)
     
 
     def retrive_telephone_err_message(self):
-        return self.driver.find_element(By.XPATH, self.telephone_err_message_xpath).text
+        return self.retrive_element_text('telephone_err_message_xpath', self.telephone_err_message_xpath)
     
     
     def retrive_password_err_message(self):
-        return self.driver.find_element(By.XPATH, self.password_err_message_xpath).text
+        return self.retrive_element_text('password_err_message_xpath', self.password_err_message_xpath)
     
 
     def verify_all_warnings(self, expected_privacy_policy_warning, expected_firstname_err_message, expected_lastname_err_message, expected_email_err_message, expected_telephone_err_message, expected_password_err_message):

@@ -27,7 +27,8 @@
 * added utility for reading (browser, url) from configuration file - create new package - configurations;
 * change all tests into POM (page object model) - create new  package - pages;
 * added return statements to the next page object into last page methods which called in tests with previous page object;
-* refactored the code in page classes and tests - develop methods which consists from another methods to make test more readable and shorter.
+* refactored the code in page classes and tests - develop methods which consists from another methods to make test more readable and shorter;
+* created BasePage class and described main methods of working with an web element, refactored other classes to be inherited from BasePage class, used parent methods;
 
 
 # Help to run tests:

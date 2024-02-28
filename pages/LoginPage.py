@@ -1,12 +1,12 @@
-from selenium.webdriver.common.by import By
+from pages.AccountPage import AccountPage
+from pages.BasePage import BasePage
 
-from .AccountPage import AccountPage
 
-
-class LoginPage:
+class LoginPage(BasePage):
     
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
+
 
     email_address_field_name = 'email'
     password_field_name = 'password'
@@ -15,24 +15,20 @@ class LoginPage:
 
 
     def enter_email_address(self, email_address):
-        self.driver.find_element(By.NAME, self.email_address_field_name).click()
-        self.driver.find_element(By.NAME, self.email_address_field_name).clear()
-        self.driver.find_element(By.NAME, self.email_address_field_name).send_keys(email_address)
+        self.type_into_element('email_address_field_name', self.email_address_field_name, email_address)
     
 
     def enter_password(self, password):
-        self.driver.find_element(By.NAME, self.password_field_name).click()
-        self.driver.find_element(By.NAME, self.password_field_name).clear()
-        self.driver.find_element(By.NAME, self.password_field_name).send_keys(password)
+        self.type_into_element('password_field_name', self.password_field_name, password)
 
 
     def click_login_btn(self):
-        self.driver.find_element(By.XPATH, self.login_btn_xpath).click()
+        self.element_click('login_btn_xpath', self.login_btn_xpath)
         return AccountPage(self.driver)
 
 
     def retrive_no_match_email_pwd(self):
-        return self.driver.find_element(By.XPATH, self.no_match_email_pwd_warning_xpath).text
+        return self.retrive_element_text('no_match_email_pwd_warning_xpath', self.no_match_email_pwd_warning_xpath)
     
 
     def login(self, email_address, password):
