@@ -32,6 +32,7 @@
 * added BaseTest class before which should paste pytest mark with fixture for all test classes and inherited this class by other test classes;
 * moved duplicate methods from test classes to BaseTest class;
 * implemented DDT in test_Login file (created new utility - ExcelUtils, added a folder for text files - ExcelFiles);
+* implemented DDT in test_Register file;
 
 
 # Help to run tests:
@@ -51,4 +52,4 @@
     + '''pyclean .'''
 
 * To run only specific test file:
-    + '''python -m pytest test/test_Search.py'''
+    + '''python -m pytest test/test_Search.py -s -v'''

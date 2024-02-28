@@ -1,13 +1,20 @@
+import pytest
 from pages.HomePage import HomePage
 from tests.BaseTest import BaseTest
+from utilities import ExcelUtils
 
 
 class TestRefister(BaseTest):
 
-    def test_register_with_mandatory_fields(self):
+    @pytest.mark.parametrize("firstname, lastname, telephone, password, newsletter_yes_or_no, select_user_agreement", ExcelUtils.get_data_from_excel("ExcelFiles/data_file.xlsx", "RegisterTest"))
+    def test_register_with_mandatory_fields(self, firstname, lastname, telephone, password, newsletter_yes_or_no, select_user_agreement):
         home_page = HomePage(self.driver)
         register_page = home_page.navigate_to_register_page()     
-        account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), '1234567890', '12345', 'no', 'select')
+        #line of code for DDT aproach
+        account_success_page = register_page.fill_register_form_mandatory_fields(firstname, lastname, self.generate_email_with_timestamp(), telephone, password, newsletter_yes_or_no, select_user_agreement)
+        
+        # line of code without DDT aproach
+        # account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), '1234567890', '12345', 'no', 'select')
     
         expected_account_created_message = 'Your Account Has Been Created!'
         resulted_account_created_message = account_success_page.retrive_account_created_message()

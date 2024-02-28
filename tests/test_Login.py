@@ -7,7 +7,7 @@ from utilities import ExcelUtils
 class TestLogin(BaseTest):
     
     # adding fixture for DDT testing
-    @pytest.mark.parametrize("email_address, password", ExcelUtils.get_data_from_excel("ExcelFiles/data_file.xlsx", "FirstTestSheet"))
+    @pytest.mark.parametrize("email_address, password", ExcelUtils.get_data_from_excel("ExcelFiles/data_file.xlsx", "LoginTest"))
     def test_login_with_valid_credentials(self, email_address, password):
         home_page = HomePage(self.driver)
         login_page = home_page.navigate_to_login_page()

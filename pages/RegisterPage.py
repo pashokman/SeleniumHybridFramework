@@ -45,13 +45,13 @@ class RegisterPage(BasePage):
         self.type_into_element('field_confirm_pwd_name', self.field_confirm_pwd_name, password)
 
 
-    def fill_register_form_mandatory_fields(self, firstname, lastname, email, telephone, password, yes_or_no, privacy_policy):
+    def fill_register_form_mandatory_fields(self, firstname, lastname, email, telephone, password, newsletter_yes_or_no, privacy_policy):
         self.enter_firstname(firstname)
         self.enter_lastname(lastname)
         self.enter_email(email)
         self.enter_telephone(telephone)
         self.enter_pwd_and_confirm_pwd(password)
-        if yes_or_no == 'yes':
+        if newsletter_yes_or_no == 'yes':
             self.select_newsletter_radio_btn_yes()
         if privacy_policy == 'select':
             self.accept_user_agreement()
