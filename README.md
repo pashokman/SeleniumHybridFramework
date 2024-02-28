@@ -26,4 +26,25 @@
 * used a fixture to classes;
 * added utility for reading (browser, url) from configuration file - create new package - configurations;
 * change all tests into POM (page object model) - create new  package - pages;
-* added return statements of the next page object into last methods which called in tests with previous page object.
+* added return statements to the next page object into last page methods which called in tests with previous page object;
+* refactored the code in page classes and tests - develop methods which consists from another methods to make test more readable and shorter.
+
+
+# Help to run tests:
+* To run all test need to use command:
+    + '''python -m pytest'''
+
+* To run some type of tests need to use command (mark names you can select in pytest.ini file, example - "python -m pytest -m api", to use few markers "api or api2"): 
+    + '''python -m pytest -m mark_name'''
+
+* To run test in paralel need to use command (need to be installed "pytest-xdist" module):
+    + '''python -m pytest -n 4'''
+
+* To see test names on console and its status need to use command:
+    + '''python -m pytest -m personal_ui_2 -s -v'''
+
+* To clean project folder from "__pychache__" (need to be installed "pyclean" module): 
+    + '''pyclean .'''
+
+* To run only specific test file:
+    + '''python -m pytest test/test_Search.py'''

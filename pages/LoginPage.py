@@ -33,3 +33,10 @@ class LoginPage:
 
     def retrive_no_match_email_pwd(self):
         return self.driver.find_element(By.XPATH, self.no_match_email_pwd_warning_xpath).text
+    
+
+    def login(self, email_address, password):
+        self.enter_email_address(email_address)
+        self.enter_password(password)
+        return self.click_login_btn()
+    

@@ -38,6 +38,21 @@ class HomePage:
         return LoginPage(self.driver)
 
 
+    def navigate_to_login_page(self):
+        self.click_on_my_account_drop_menu()
+        return self.select_login_option()
+
+
     def select_register_option(self):
         self.driver.find_element(By.LINK_TEXT, self.register_option_link_text).click()
         return RegisterPage(self.driver)
+    
+
+    def navigate_to_register_page(self):
+        self.click_on_my_account_drop_menu()
+        return self.select_register_option()
+
+
+    def search_for_a_product(self, product_name):
+        self.enter_product_into_search_field(product_name)
+        return self.click_on_search_btn() 
