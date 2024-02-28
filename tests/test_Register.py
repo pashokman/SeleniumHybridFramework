@@ -1,4 +1,3 @@
-from datetime import datetime
 from pages.HomePage import HomePage
 from tests.BaseTest import BaseTest
 
@@ -49,10 +48,3 @@ class TestRefister(BaseTest):
         expected_telephone_err_message = 'Telephone must be between 3 and 32 characters!'
         expected_password_err_message = 'Password must be between 4 and 20 characters!'
         assert register_page.verify_all_warnings(expected_privacy_policy_warning, expected_firstname_err_message, expected_lastname_err_message, expected_email_err_message, expected_telephone_err_message, expected_password_err_message), "Register warning/message does not match"
-        
-
-
-    def generate_email_with_timestamp(self):
-        time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        address = "test_auto" + time_stamp + "@gmail.com"
-        return address

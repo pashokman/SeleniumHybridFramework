@@ -1,4 +1,3 @@
-from datetime import datetime
 from pages.HomePage import HomePage
 from tests.BaseTest import BaseTest
 
@@ -44,9 +43,3 @@ class TestLogin(BaseTest):
         expected_error_warning = 'Warning: No match for E-Mail Address and/or Password.'
         resulted_error_warning = login_page.retrive_no_match_email_pwd()
         assert resulted_error_warning == expected_error_warning, "Email/Password warnings does not match"
-
-
-    def generate_email_with_timestamp(self):
-        time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        address = "test_auto" + time_stamp + "@gmail.com"
-        return address
