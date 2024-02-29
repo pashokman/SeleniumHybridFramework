@@ -34,6 +34,7 @@
 * implemented DDT in test_Login file (created new utility - ExcelUtils, added a folder for text files - ExcelFiles);
 * implemented DDT in test_Register file;
 * added code for taking screenshot on failure in conftest.py - log_on_failure, pytest_runtest_makereport, call the fixture in BaseTest class for working with all tests, broke one search test for getting a screenshot on failure;
+* added virtual environment;
 
 
 # Help to run tests:
@@ -58,3 +59,6 @@
 * To run tests and create report files - first command, to generate the report in root folder open cmd - second command:
     + '''python -m pytest -v -s --alluredir="./Reports"'''
     + '''allure serve "./Reports"'''
+
+* To add virtual environment:
+    + '''python -m venv venv'''
