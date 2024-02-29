@@ -24,6 +24,10 @@ class TestSearch(BaseTest):
         home_page = HomePage(self.driver)
         search_page = home_page.search_for_a_product('')
 
-        expected_search_err_message = "There is no product that matches the search criteria."
+        # default working code
+        # expected_search_err_message = "There is no product that matches the search criteria."
+
+        # code for taking screenshot on failure
+        expected_search_err_message = "There is no product that matches the search criteria.Unnecessary text"
         result_search_err_message = search_page.retrive_no_product_message()        
         assert result_search_err_message == expected_search_err_message, "Empty search err messages does not match"
