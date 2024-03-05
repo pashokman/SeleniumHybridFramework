@@ -45,7 +45,8 @@ class RegisterPage(BasePage):
         self.type_into_element('field_confirm_pwd_name', self.field_confirm_pwd_name, password)
 
 
-    def fill_register_form_mandatory_fields(self, firstname, lastname, email, telephone, password, newsletter_yes_or_no, privacy_policy):
+    def fill_register_form_mandatory_fields(self, firstname, lastname, email, telephone, 
+                                            password, newsletter_yes_or_no, privacy_policy):
         self.enter_firstname(firstname)
         self.enter_lastname(lastname)
         self.enter_email(email)
@@ -95,7 +96,9 @@ class RegisterPage(BasePage):
         return self.retrive_element_text('password_err_message_xpath', self.password_err_message_xpath)
     
 
-    def verify_all_warnings(self, expected_privacy_policy_warning, expected_firstname_err_message, expected_lastname_err_message, expected_email_err_message, expected_telephone_err_message, expected_password_err_message):
+    def verify_all_warnings(self, expected_privacy_policy_warning, expected_firstname_err_message, 
+                            expected_lastname_err_message, expected_email_err_message, 
+                            expected_telephone_err_message, expected_password_err_message):
         actual_privacy_policy_warning = self.retrive_warning()
         actual_firstname_err_message = self.retrive_firstname_err_message()
         actual_lastname_err_message = self.retrive_lastname_err_message()

@@ -21,14 +21,14 @@
 # Steps for develop the framework
 * created different test files to test different functionality (login, register, search);
 * wrote independent tests for every test-case;
-* created a fixture and moved it to the conftest.py file;
+* created a fixture and moved it to the ```conftest.py``` file;
 * wrapped tests into classes;
 * used a fixture to classes;
-* added utility for reading (browser, url) from configuration file - create new package - configurations;
+* added utility for reading (browser, url) from configuration file - create new package - configurations, with ```config.ini``` in it;
 * change all tests into POM (page object model) - create new  package - pages;
 * added return statements to the next page object into last page methods which called in tests with previous page object;
 * refactored the code in page classes and tests - develop methods which consists from another methods to make test more readable and shorter;
-* created BasePage class and described main methods of working with an web element, refactored other classes to be inherited from BasePage class, used parent methods;
+* created BasePage class and described main methods of working with an web element, refactored other classes to be inherited from BasePage class, used parent class methods in child class methods;
 * added BaseTest class before which should paste pytest mark with fixture for all test classes and inherited this class by other test classes;
 * moved duplicate methods from test classes to BaseTest class;
 * implemented DDT in test_Login file (created new utility - ExcelUtils, added a folder for text files - ExcelFiles);

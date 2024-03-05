@@ -4,31 +4,43 @@ from tests.BaseTest import BaseTest
 from utilities import ExcelUtils
 
 
-class TestRefister(BaseTest):
+class TestRegister(BaseTest):
 
-    @pytest.mark.parametrize("firstname, lastname, telephone, password, newsletter_yes_or_no, select_user_agreement", ExcelUtils.get_data_from_excel("ExcelFiles/data_file.xlsx", "RegisterTest"))
-    def test_register_with_mandatory_fields(self, firstname, lastname, telephone, password, newsletter_yes_or_no, select_user_agreement):
+    @pytest.mark.parametrize("firstname, lastname, telephone, password, newsletter_yes_or_no, select_user_agreement", 
+                             ExcelUtils.get_data_from_excel("ExcelFiles/data_file.xlsx", "RegisterTest"))
+    def test_register_with_mandatory_fields(self, firstname, lastname, telephone, password, 
+                                            newsletter_yes_or_no, select_user_agreement):
         home_page = HomePage(self.driver)
         register_page = home_page.navigate_to_register_page()     
         #line of code for DDT aproach
-        account_success_page = register_page.fill_register_form_mandatory_fields(firstname, lastname, self.generate_email_with_timestamp(), telephone, password, newsletter_yes_or_no, select_user_agreement)
+        account_success_page = register_page.fill_register_form_mandatory_fields(firstname, lastname, 
+                                                                                 self.generate_email_with_timestamp(), 
+                                                                                 telephone, password, 
+                                                                                 newsletter_yes_or_no, 
+                                                                                 select_user_agreement)
         
         # line of code without DDT aproach
-        # account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), '1234567890', '12345', 'no', 'select')
+        # account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", 
+        #                                                                          self.generate_email_with_timestamp(), 
+        #                                                                          '1234567890', '12345', 'no', 'select')
     
         expected_account_created_message = 'Your Account Has Been Created!'
         resulted_account_created_message = account_success_page.retrive_account_created_message()
-        assert resulted_account_created_message == expected_account_created_message, "Account created messages (mandatory fields) does not match"
+        assert resulted_account_created_message == expected_account_created_message, \
+            "Account created messages (mandatory fields) does not match"
 
 
     def test_register_with_all_fields(self):
         home_page = HomePage(self.driver)
         register_page = home_page.navigate_to_register_page()         
-        account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", self.generate_email_with_timestamp(), '1234567890', '12345', 'yes', 'select')
+        account_success_page = register_page.fill_register_form_mandatory_fields("John", "Doe", 
+                                                                                 self.generate_email_with_timestamp(), 
+                                                                                 '1234567890', '12345', 'yes', 'select')
     
         expected_account_created_message = 'Your Account Has Been Created!'
         resulted_account_created_message = account_success_page.retrive_account_created_message()
-        assert resulted_account_created_message == expected_account_created_message, "Account create messages (all fields) does not match"
+        assert resulted_account_created_message == expected_account_created_message, \
+            "Account create messages (all fields) does not match"
 
 
     def test_register_with_duplicate_email(self):
@@ -36,7 +48,8 @@ class TestRefister(BaseTest):
         register_page = home_page.navigate_to_register_page()        
         # email should be copied from test_Login.py - test_login_with_valid_credentials and email should be 
         # already registered another fields should be different from test_Login.py - test_login_with_valid_credentials
-        register_page.fill_register_form_mandatory_fields("Jane", "Doe", 'test_auto@gmail.com', '2234567890', '123456', 'no', 'select')
+        register_page.fill_register_form_mandatory_fields("Jane", "Doe", 'test_auto@gmail.com', 
+                                                          '2234567890', '123456', 'no', 'select')
 
         expected_duplicate_email_warning = 'Warning: E-Mail Address is already registered!'
         resulted_duplicate_email_warning = register_page.retrive_warning()
@@ -54,4 +67,7 @@ class TestRefister(BaseTest):
         expected_email_err_message = 'E-Mail Address does not appear to be valid!'
         expected_telephone_err_message = 'Telephone must be between 3 and 32 characters!'
         expected_password_err_message = 'Password must be between 4 and 20 characters!'
-        assert register_page.verify_all_warnings(expected_privacy_policy_warning, expected_firstname_err_message, expected_lastname_err_message, expected_email_err_message, expected_telephone_err_message, expected_password_err_message), "Register warning/message does not match"
+        assert register_page.verify_all_warnings(expected_privacy_policy_warning, expected_firstname_err_message, 
+                                                 expected_lastname_err_message, expected_email_err_message, 
+                                                 expected_telephone_err_message, expected_password_err_message), \
+                                                    "Register warning/message does not match"

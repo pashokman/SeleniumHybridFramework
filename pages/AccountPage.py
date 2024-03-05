@@ -11,4 +11,5 @@ class AccountPage(BasePage):
 
 
     def display_status_of_field_after_successful_login(self):
-        return self.check_display_status_of_element('field_after_successful_login_link_text', self.field_after_successful_login_link_text)
+        return self.check_display_status_of_element('field_after_successful_login_link_text', 
+                                                    self.field_after_successful_login_link_text)
