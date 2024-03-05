@@ -115,21 +115,21 @@ java -jar selenium-server-4.18.1.jar node --detect-drivers true --publish-events
 3. Open ```cmd``` from the same folder where we downloaded Selenium Grid.
 We shoul configure comunication between different components of Grid
 All these command shoul run in new ```cmd``` console from folder where Selenium Grid was downloaded:
-4. First we should run ```even-bus``` component: ```java -jar selenium-server-4.18.1.jar event-bus```. 
+4. First we should run ```even-bus``` component: ```java -jar selenium-server-4.18.1.jar event-bus```. \
 It has socket - ```<ip>:5556```.
-5. Second we should run ```session-map``` component: ```java -jar selenium-server-4.18.1.jar sessions```. 
+5. Second we should run ```session-map``` component: ```java -jar selenium-server-4.18.1.jar sessions```. \
 It has socket - ```<ip>:5557```.
-6. Third we should run ```session-queue``` component: ```java -jar selenium-server-4.18.1.jar sessionqueue```. 
+6. Third we should run ```session-queue``` component: ```java -jar selenium-server-4.18.1.jar sessionqueue```. \
 It has socket - ```<ip>:5559```.
 7. Fourth we should run ```distributor``` component:
 ```
 java -jar selenium-server-4.18.1.jar distributor --sessions http://<ip_from_session_map>:5556 --sessionqueue http://<ip_from_session_queue>:5559 --bind-bus false
 ``` 
-It has socket - ```<ip>:5553```.
+It has socket - ```<ip>:5553```.\
 8. Fifth we should run ```router``` component:
 ```
 java -jar selenium-server-4.18.1.jar router --sessions http://<ip_from_session_map>:5556 --distributor http://<ip_from_distributor>:5553 --sessionqueue http://<ip_from_session_queue>:5559
-```. 
+``` 
 It has socket - ```<ip>:4444```.
 9. Run command to start node (if we run on the same machine): ```java -jar selenium-server-4.18.1.jar node```\
 Run command to start node (if we run on another machine): 
