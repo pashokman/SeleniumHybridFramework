@@ -130,7 +130,7 @@ It has socket - ```<ip>:5553```.\
 ```
 java -jar selenium-server-4.18.1.jar router --sessions http://<ip_from_session_map>:5556 --distributor http://<ip_from_distributor>:5553 --sessionqueue http://<ip_from_session_queue>:5559
 ``` 
-It has socket - ```<ip>:4444```.
+It has socket - ```<ip>:4444```.\
 9. Run command to start node (if we run on the same machine): ```java -jar selenium-server-4.18.1.jar node```\
 Run command to start node (if we run on another machine): 
 ```
