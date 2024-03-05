@@ -104,7 +104,9 @@ def setup_and_teardown(request):
 4. Run command to start hub on the first machine: ```java -jar selenium-server-4.18.1.jar hub```.
 5. Run command to start node on the same first machine: ```java -jar selenium-server-4.18.1.jar node```.
 6. If we want to start node on the second machine and hub already running on the first machine, we should run the command on the second machine (where <hub-ip> we can get from ```cmd``` console): 
-```java -jar selenium-server-4.18.1.jar node --detect-drivers true --publish-events tcp://<hub-ip>:4442 --subscribe-events tcp://<hub-ip>:4443```
+```
+java -jar selenium-server-4.18.1.jar node --detect-drivers true --publish-events tcp://<hub-ip>:4442 --subscribe-events tcp://<hub-ip>:4443
+```
 7. Also we should change ```conftest.py``` file as in Standalone mode and then we can run tests.
 
 ## Distributed mode (use if we have a large size of Grid to setup)
@@ -113,16 +115,27 @@ def setup_and_teardown(request):
 3. Open ```cmd``` from the same folder where we downloaded Selenium Grid.
 We shoul configure comunication between different components of Grid
 All these command shoul run in new ```cmd``` console from folder where Selenium Grid was downloaded:
-4. First we should run ```even-bus``` component: ```java -jar selenium-server-4.18.1.jar event-bus```. It has socket - <ip>:5556.
-5. Second we should run ```session-map``` component: ```java -jar selenium-server-4.18.1.jar sessions```. It has socket - <ip>:5557.
-6. Third we should run ```session-queue``` component: ```java -jar selenium-server-4.18.1.jar sessionqueue```. It has socket - <ip>:5559.
+4. First we should run ```even-bus``` component: ```java -jar selenium-server-4.18.1.jar event-bus```. 
+It has socket - ```<ip>:5556```.
+5. Second we should run ```session-map``` component: ```java -jar selenium-server-4.18.1.jar sessions```. 
+It has socket - ```<ip>:5557```.
+6. Third we should run ```session-queue``` component: ```java -jar selenium-server-4.18.1.jar sessionqueue```. 
+It has socket - ```<ip>:5559```.
 7. Fourth we should run ```distributor``` component:
-```java -jar selenium-server-4.18.1.jar distributor --sessions http://<ip_from_session_map>:5556 --sessionqueue http://<ip_from_session_queue>:5559 --bind-bus false``` It has socket - <ip>:5553.
+```
+java -jar selenium-server-4.18.1.jar distributor --sessions http://<ip_from_session_map>:5556 --sessionqueue http://<ip_from_session_queue>:5559 --bind-bus false
+``` 
+It has socket - ```<ip>:5553```.
 8. Fifth we should run ```router``` component:
-```java -jar selenium-server-4.18.1.jar router --sessions http://<ip_from_session_map>:5556 --distributor http://<ip_from_distributor>:5553 --sessionqueue http://<ip_from_session_queue>:5559```. It has socket - <ip>:4444.
-9. Run command to start node (if we run on the same machine): ```java -jar selenium-server-4.18.1.jar node```
+```
+java -jar selenium-server-4.18.1.jar router --sessions http://<ip_from_session_map>:5556 --distributor http://<ip_from_distributor>:5553 --sessionqueue http://<ip_from_session_queue>:5559
+```. 
+It has socket - ```<ip>:4444```.
+9. Run command to start node (if we run on the same machine): ```java -jar selenium-server-4.18.1.jar node```\
 Run command to start node (if we run on another machine): 
-```java -jar selenium-server-4.18.1.jar node --detect-drivers true --publish-events tcp://<hub-ip>:4442 --subscribe-events tcp://<hub-ip>:4443```
+```
+java -jar selenium-server-4.18.1.jar node --detect-drivers true --publish-events tcp://<hub-ip>:4442 --subscribe-events tcp://<hub-ip>:4443
+```
 
 
 # Help to run tests:
